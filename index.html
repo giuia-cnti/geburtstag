@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stefans 60. Geburtstag</title>
+
+<style>
+
+:root {
+    --dark-blue: #0a2538;
+    --white: #ffffff;
+    --accent-orange: #f3a633;
+    --accent-green: #7dc242;
+    --accent-pink: #d881b4;
+    --accent-purple: #a164a9;
+    --accent-cyan: #4bc3cf;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--dark-blue);
+    color: var(--white);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    overflow-x: hidden;
+    position: relative;
+}
+
+h1, h2 {
+    font-family: 'Arial Black', sans-serif;
+}
+
+p {
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.decor-wrap {
+    position: absolute;
+    width: 100%;
+    height: 3000px;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.decor-line{
+    position:absolute;
+    width:100%;
+    height:200px;
+    opacity:0.7;
+}
+
+.p1{top:120px; transform:rotate(8deg);}
+.p2{top:420px; transform:rotate(-6deg);}
+.p3{top:780px; transform:rotate(5deg);}
+.p4{top:1150px; transform:rotate(-8deg);}
+.p5{top:1500px; transform:rotate(10deg);}
+.p6{top:1850px; transform:rotate(-5deg);}
+.p7{top:2150px; transform:rotate(7deg);}
+.p8{top:2500px; transform:rotate(-4deg);}
+
+.decor-line svg{
+width:100%;
+height:200px;
+}
+
+/* CONTENT */
+
+.content {
+    position: relative;
+    z-index: 10;
+}
+
+header {
+    padding: 80px 20px 30px 20px; /* oben 80px, unten 40px */
+}
+
+h1 { font-size: 3.5rem; text-transform: uppercase; margin: 0; }
+
+section { padding: 60px 20px; max-width: 900px; margin: auto; }
+
+/* SLIDER */
+
+.slider {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    margin-left: -50vw;
+    overflow: hidden;
+    padding: 40px 0;
+}
+
+.slides {
+    display: flex;
+    width: fit-content;
+    animation: scrollInfinite 40s linear infinite;
+}
+
+.slides img {
+    width: 300px;
+    height: 250px;
+    object-fit: cover;
+    margin: 0 15px;
+    border: 10px solid white;
+    box-shadow: 5px 5px 15px rgba(0,0,0,0.4);
+    transform: rotate(-2deg);
+    flex-shrink: 0;
+}
+
+.slides img:nth-child(even) {
+    transform: rotate(3deg) translateY(10px);
+}
+
+@keyframes scrollInfinite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* LOCATION */
+
+.location-text{
+    max-width:700px;
+    margin:30px auto;
+    text-align:left;
+}
+
+.location-text p{
+    margin-bottom:16px;
+}
+
+.location-text .ps{
+    margin-top:25px;
+    font-style:italic;
+}
+
+.map-container{
+    margin-top:30px;
+    border:10px solid white;
+    box-shadow:5px 5px 15px rgba(0,0,0,0.4);
+}
+
+/* FORMULAR */
+
+.rsvp-box {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+}
+
+input, button {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid var(--white);
+    font-size: 1rem;
+    box-sizing: border-box;
+    background-color: var(--dark-blue);
+    color: var(--white);
+}
+
+button {
+    background-color: var(--accent-green);
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    border: none;
+}
+
+.option-group {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin: 15px 0 25px 0;
+    justify-content: flex-start;
+    text-align: left;
+}
+
+.option-group label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.option-group input {
+    width: auto;
+    transform: scale(1.3);
+}
+
+footer {
+    padding: 60px;
+    opacity: 0.9;
+    font-family: 'Arial Black', sans-serif;
+    font-size: 7.5rem;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+footer p {
+    font-size: 2.5rem !important;
+    line-height: 1.1;
+}
+
+/* Konfetti-Canvas */
+#confetti-canvas{
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    z-index:9999;
+}
+
+/* Thankyou Modal */
+#thankyou-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 37, 56, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+#thankyou-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.thankyou-box {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+    text-align: center;
+    max-width: 400px;
+    animation: scaleIn 0.4s ease;
+}
+
+.thankyou-box h3 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.thankyou-box p {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.thankyou-box button {
+    background-color: var(--accent-green);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+@keyframes scaleIn {
+    0% { transform: scale(0.7); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="decor-wrap">
+
+<div class="decor-line p1">
+<svg viewBox="0 0 2000 200">
+<path d="M0 100 C400 0 800 200 1200 100 S1600 0 2000 100"
+stroke="#f3a633" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div class="decor-line p2">
+<svg viewBox="0 0 2000 200">
+<path d="M0 120 Q600 -20 1200 120 T2000 120"
+stroke="#d881b4" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div class="decor-line p3">
+<svg viewBox="0 0 2000 200">
+<path d="M0 80 C400 150 800 40 1200 120 S1600 200 2000 60"
+stroke="#7dc242" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div class="decor-line p4">
+<svg viewBox="0 0 2000 200">
+<path d="M0 100 C400 40 800 160 1200 60 S1600 20 2000 110"
+stroke="#4bc3cf" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div class="decor-line p5">
+<svg viewBox="0 0 2000 200">
+<path d="M0 90 C400 0 800 200 1200 80 S1600 0 2000 100"
+stroke="#f3a633" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div class="decor-line p6">
+<svg viewBox="0 0 2000 200">
+<path d="M0 110 C400 50 800 180 1200 100 S1600 40 2000 120"
+stroke="#d881b4" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div class="decor-line p7">
+<svg viewBox="0 0 2000 200">
+<path d="M0 80 Q600 20 1200 100 T2000 90"
+stroke="#7dc242" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>
+</div>
+
+<div class="decor-line p8">
+<svg viewBox="0 0 2000 200">
+<path d="M0 100 C400 0 800 200 1200 90 S1600 10 2000 110"
+stroke="#4bc3cf" stroke-width="6" fill="none" stroke-linecap="round"/>
+</svg>
+</div>
+
+</div>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="content">
+
+<header>
+<h1>STEFANS <span style="display:block; font-size:7rem; line-height:0.9;">60.</span> GEBURTSTAG</h1>
+<p>8. AUGUST 2026 | HUNDEPLATZ MÖMLINGEN</p>
+</header>
+<section>
+    <h2>Highlights der letzten 60 Jahre</h2>
+    <div class="slider">
+      <div class="slides">
+        <!-- Originalbilder -->
+        <img src="assets/bett.jpeg">
+        <img src="assets/italien.jpeg">
+        <img src="assets/test.jpeg">
+        <img src="assets/sommer.jpeg">
+        <img src="assets/familie2.jpg">
+        <img src="assets/fasching.jpeg">
+        <img src="assets/brueder.jpg">
+        <img src="assets/familie.jpeg">
+        <img src="assets/giulia.jpeg">
+        <img src="assets/sainttropez.jpeg">
+        <img src="assets/kanada.jpg">
+        <img src="assets/christian.JPG">
+        
+        <!-- Duplikate für nahtlose Animation -->
+        <img src="assets/bett.jpeg">
+        <img src="assets/italien.jpeg">
+        <img src="assets/test.jpeg">
+        <img src="assets/sommer.jpeg">
+        <img src="assets/familie2.jpg">
+        <img src="assets/fasching.jpeg">
+        <img src="assets/brueder.jpg">
+        <img src="assets/familie.jpeg">
+        <img src="assets/giulia.jpeg">
+        <img src="assets/sainttropez.jpeg">
+        <img src="assets/kanada.jpg">
+        <img src="assets/christian.JPG">
+      </div>
+    </div>
+</section>
+
+<section id="anmeldung">
+<div class="rsvp-box">
+<h2>Bist du dabei?</h2>
+<p> Bitte gebt bis zum 15. Mai Bescheid, ob ihr kommen könnt :) </p>
+<form id="rsvpForm" action="https://formspree.io/f/xqeyqqpp" method="POST">
+<input type="hidden" name="_subject" value="Neue Anmeldung Stefans 60. Geburtstag">
+<input type="text" name="name" placeholder="Name / Namen" required>
+<div class="option-group">
+<label><input type="radio" name="teilnahme" value="dabei" required>Ich / Wir sind dabei</label>
+<label><input type="radio" name="teilnahme" value="absage">Ich / Wir können leider nicht</label>
+</div>
+<p style="text-align:left;"><strong>Besonderheiten beim Essen</strong></p>
+<div class="option-group">
+<label><input type="radio" name="essen" value="vegetarisch">Vegetarisch</label>
+<label><input type="radio" name="essen" value="vegan">Vegan</label>
+<label><input type="radio" name="essen" value="alles">Ich esse alles</label>
+</div>
+<button type="submit">Absenden</button>
+</form>
+</div>
+</section>
+
+<section>
+    <h2>LOCATION</h2>
+    <div class="location-text">
+    <p>
+    Gefeiert wird auf dem Hundeplatz in Mömlingen. Dieser liegt am Rande des Ortes, ein Stück hinter dem Industriegebiet.
+    </p>
+    <p>
+    Nehmt hierfür die Ausfahrt am Kreisel in Richtung Höchst. Anschließend fahrt ihr die Straße B426 circa 2,5km entlang und verlasst das Ort.
+    </p>
+    <p>
+    Bei der nächsten Möglichkeit dann links abbiegen und der Hundeplatz ist bereits in Sicht.
+    </p>
+    <p>
+    Gute Fahrt!
+    </p>
+    <p class="ps">
+    PS: Parkmöglichkeiten sind direkt vor Ort vorhanden.
+    </p>
+    </div>
+    <div class="map-container">
+    <iframe width="100%" height="400" style="border:0" loading="lazy" allowfullscreen src="https://www.google.com/maps?q=Hundeplatz+Mömlingen&output=embed"></iframe>
+    </div>
+    </section>
+
+<footer>
+<p>Ich freu mich auf euch! </p>
+<p>Euer Stefan</p>
+<img src="assets/last2.png">
+</footer>
+
+</div>
+
+<!-- Thankyou Modal -->
+<div id="thankyou-modal">
+  <div class="thankyou-box">
+    <h3>Vielen Dank!</h3>
+    <p>Deine Infos wurden an Stefan übermittelt.</p>
+    <button id="closeModal">Schließen</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+const form = document.getElementById('rsvpForm');
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+
+    // Konfetti starten
+    confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
+
+    // Modal anzeigen
+    const modal = document.getElementById('thankyou-modal');
+    modal.classList.add('active');
+
+    // Modal schließen-Button
+    document.getElementById('closeModal').addEventListener('click', function(){
+        modal.classList.remove('active');
+    });
+
+    // Optional: nach 5 Sekunden automatisch schließen
+    setTimeout(() => {
+        modal.classList.remove('active');
+    }, 5000);
+
+    // Formular per Fetch an Formspree senden
+    const formData = new FormData(form);
+    fetch(form.action, {
+        method: form.method,
+        body: formData,
+        headers: { 'Accept': 'application/json' }
+    }).then(response => {
+        if(response.ok){
+            console.log("Formular erfolgreich gesendet!");
+            form.reset(); // Formular zurücksetzen
+        } else {
+            alert("Es gab ein Problem beim Absenden.");
+        }
+    }).catch(error => {
+        alert("Fehler beim Absenden: " + error);
+    });
+});
+</script>
+
+</body>
+</html>
+
+
+ 
