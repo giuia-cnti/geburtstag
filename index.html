@@ -279,6 +279,133 @@ footer p {
     0% { transform: scale(0.7); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
 }
+/* ===== Mobile Optimierung ===== */
+@media (max-width: 768px) {
+
+/* BODY & CONTENT */
+body {
+    text-align: center;
+}
+
+.content {
+    padding: 0 10px;
+}
+
+/* HEADER */
+header {
+    padding: 40px 10px 20px 10px;
+}
+
+h1 {
+    font-size: 2.4rem;
+}
+
+h1 span {
+    display: block;
+    font-size: 5rem;
+    line-height: 1;
+}
+
+header p {
+    font-size: 1rem;
+}
+
+/* SECTIONS */
+section {
+    padding: 30px 10px;
+    text-align: center;
+}
+
+/* SLIDER */
+.slider {
+    padding: 20px 0;
+}
+
+.slides {
+    animation: scrollInfinite 60s linear infinite;
+}
+
+.slides img {
+    width: 220px;
+    height: 150px;
+    margin: 0 8px;
+    border-width: 6px;
+}
+
+.slides img:nth-child(even) {
+    transform: rotate(2deg) translateY(5px);
+}
+
+/* RSVP FORM */
+.rsvp-box {
+    padding: 20px;
+    border-radius: 15px;
+}
+
+input, button {
+    padding: 12px;
+    font-size: 0.95rem;
+}
+
+.option-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    text-align: center;
+}
+
+.option-group label {
+    font-size: 0.95rem;
+    justify-content: center;
+}
+
+/* LOCATION */
+.location-text {
+    font-size: 0.95rem;
+    text-align: center;
+    margin: 0 auto 20px auto;
+}
+
+.map-container iframe {
+    height: 250px;
+}
+
+/* FOOTER */
+footer {
+    padding: 30px 10px;
+    font-size: 4rem;
+    line-height: 1.1;
+}
+
+footer p {
+    font-size: 1.5rem !important;
+}
+
+footer img {
+    max-width: 80%;
+    height: auto;
+    margin-top: 15px;
+}
+
+/* THANKYOU MODAL */
+.thankyou-box {
+    padding: 20px;
+    max-width: 300px;
+}
+
+.thankyou-box h3 {
+    font-size: 1.5rem;
+}
+
+.thankyou-box p {
+    font-size: 1rem;
+}
+
+.thankyou-box button {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+}
+}
 </style>
 </head>
 
